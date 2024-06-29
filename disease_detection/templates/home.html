@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Medical Image Classification</title>
+    <link rel="stylesheet" href="{% static '/css/home.css' %}">
+    {% comment %} <link rel="stylesheet" href="{% static 'css/styles.css' %}"> {% endcomment %}
+</head>
+<body>
+    
+
+    <div class="video-container">
+
+        <video autoplay muted loop id="video-background">
+            <source src="{% static 'videos/3130284-uhd_3840_2160_30fps.mp4' %}" type="video/mp4">
+        </video>
+
+        <div class="navbar">
+            <a href="{% url 'home' %}" class="active">Home</a>
+            <a href="{% url 'about_us' %}">About Us</a>
+            <a href="{% url 'info' %}">Info</a>
+            <a href="{% url 'kidney_disease_detect' %}">Disease Detection</a>
+        </div>
+        <div class="text">
+            <h1 id="typing-header"></h1>
+            <p id="typing-text"></p>
+        </div>
+    </div>
+
+    <script>
+        const headerText = "Welcome to Kidney Disease Classification";
+        const paragraphText = "Empower renal health assessments with advanced machine learning. Our platform harnesses image analysis to provide accurate insights into kidney conditions, revolutionizing diagnostic capabilities for enhanced patient care.";
+        let headerIndex = 0;
+        let paragraphIndex = 0;
+
+        function typeWriterHeader() {
+            if (headerIndex < headerText.length) {
+                document.getElementById("typing-header").innerHTML += headerText.charAt(headerIndex);
+                headerIndex++;
+                setTimeout(typeWriterHeader, 50);
+            }
+        }
+
+        function typeWriterParagraph() {
+            if (paragraphIndex < paragraphText.length) {
+                document.getElementById("typing-text").innerHTML += paragraphText.charAt(paragraphIndex);
+                paragraphIndex++;
+                setTimeout(typeWriterParagraph, 20);
+            }
+        }
+
+        window.onload = function () {
+            typeWriterHeader();
+            setTimeout(typeWriterParagraph, 2000); // Start typing the paragraph after 2 seconds
+        };
+    </script>
+
+
+
+
+
+
+
+
+    </div>
+
+</body>
+</html>
+rgb(255, 0, 0)
