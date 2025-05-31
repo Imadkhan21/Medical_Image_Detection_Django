@@ -1,69 +1,80 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Medical Image Classification</title>
-    <link rel="stylesheet" href="{% static '/css/home.css' %}">
-    {% comment %} <link rel="stylesheet" href="{% static 'css/styles.css' %}"> {% endcomment %}
-</head>
-<body>
-    
+{% block title %}Home{% endblock %}
 
-    <div class="video-container">
+{% block content %}
+<style>
+  body {
+    background: linear-gradient(135deg, #1f1c2c, #928dab);
+    background-size: 200% 200%;
+    animation: backgroundShift 15s ease infinite;
+  }
 
-        <video autoplay muted loop id="video-background">
-            <source src="{% static 'videos/3130284-uhd_3840_2160_30fps.mp4' %}" type="video/mp4">
-        </video>
+  @keyframes backgroundShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
 
-        <div class="navbar">
-            <a href="{% url 'home' %}" class="active">Home</a>
-            <a href="{% url 'about_us' %}">About Us</a>
-            <a href="{% url 'info' %}">Info</a>
-            <a href="{% url 'kidney_disease_detect' %}">Disease Detection</a>
-        </div>
-        <div class="text">
-            <h1 id="typing-header"></h1>
-            <p id="typing-text"></p>
-        </div>
-    </div>
+  .glass-container {
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
+    padding: 40px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+    color: white;
+    max-width: 1300px; 
+    max-height:max-content;
+    margin: auto;
+  }
 
-    <script>
-        const headerText = "Welcome to Kidney Disease Classification";
-        const paragraphText = "Empower renal health assessments with advanced machine learning. Our platform harnesses image analysis to provide accurate insights into kidney conditions, revolutionizing diagnostic capabilities for enhanced patient care.";
-        let headerIndex = 0;
-        let paragraphIndex = 0;
+  #typing-text {
+    font-size: 1.2rem;
+    color: #d1d1d1;
+  }
 
-        function typeWriterHeader() {
-            if (headerIndex < headerText.length) {
-                document.getElementById("typing-header").innerHTML += headerText.charAt(headerIndex);
-                headerIndex++;
-                setTimeout(typeWriterHeader, 50);
-            }
-        }
+  .btn-success {
+    background-color: #28a745;
+    border: none;
+    font-weight: bold;
+  }
 
-        function typeWriterParagraph() {
-            if (paragraphIndex < paragraphText.length) {
-                document.getElementById("typing-text").innerHTML += paragraphText.charAt(paragraphIndex);
-                paragraphIndex++;
-                setTimeout(typeWriterParagraph, 20);
-            }
-        }
+  .btn-success:hover {
+    background-color: #218838;
+  }
 
-        window.onload = function () {
-            typeWriterHeader();
-            setTimeout(typeWriterParagraph, 2000); // Start typing the paragraph after 2 seconds
-        };
-    </script>
+  video {
+    border-radius: 20px;
+  }
+</style>
 
+<div class="glass-container text-center mt-5">
+  <h1 class="display-5 fw-bold text-info mb-3">Welcome to Kidney Disease Classification</h1>
+  <p class="lead mb-4" id="typing-text"></p>
 
+  <video autoplay muted loop id="video-background" class="w-100 shadow mb-4">
+    <source src="{% static 'videos/3130284-uhd_3840_2160_30fps.mp4' %}" type="video/mp4">
+  </video>
 
+  <a href="{% url 'kidney_disease_detect' %}" class="btn btn-lg btn-success shadow">Start Detection</a>
+</div>
+{% endblock %}
 
+{% block extra_scripts %}
+<script>
+  const paragraphText = "Empower renal health assessments with machine learning. Our platform analyzes medical images to deliver accurate diagnostics.";
+  let paragraphIndex = 0;
 
+  function typeWriter() {
+    if (paragraphIndex < paragraphText.length) {
+      document.getElementById("typing-text").innerHTML += paragraphText.charAt(paragraphIndex);
+      paragraphIndex++;
+      setTimeout(typeWriter, 25);
+    }
+  }
 
-
-
-    </div>
-
-</body>
-</html>
-rgb(255, 0, 0)
+  window.onload = typeWriter;
+</script>
+{% endblock %}

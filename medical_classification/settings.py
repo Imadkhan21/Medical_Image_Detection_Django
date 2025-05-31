@@ -126,3 +126,11 @@ MEDIA_URL = '/media/'
 
 # Define the path to the media files directory
 MEDIA_ROOT = os.path.join(BASE_DIR, 'posts')
+
+
+import os
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+

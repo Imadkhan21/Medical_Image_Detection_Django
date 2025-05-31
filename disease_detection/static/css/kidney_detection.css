@@ -1,0 +1,59 @@
+body {
+    background-color: #1c1c1c;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #ffffff;
+    margin-top: 40px;
+}
+
+.card {
+    background-color: #2e2e2e !important;
+    border-radius: 15px;
+    border: none;
+}
+
+.card h2 {
+    font-size: 26px;
+    font-weight: bold;
+    color: #3ac5f0;
+}
+
+label {
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: #fff;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="file"] {
+    background-color: #444;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    padding: 10px;
+    width: 100%;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="file"]:focus {
+    outline: none;
+    box-shadow: 0 0 5px #00bcd4;
+}
+
+.btn-info {
+    background-color: #00bcd4;
+    border: none;
+    font-weight: bold;
+}
+
+.btn-info:hover {
+    background-color: #0198a0;
+}
+
+.alert-success {
+    background-color: #28a745;
+    color: white;
+    font-size: 18px;
+    border-radius: 8px;
+}
