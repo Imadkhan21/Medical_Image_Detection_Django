@@ -1,5 +1,5 @@
 # Medical_Image_Disease_detection_Django
- Medical Image classification using deep learning, Chest Disease classification, Brain tumor detection, kidney disease detection , Skin disease detection
+ Medical Image classification using deep learning, Chest Disease classification, Brain tumor detection, kidney disease detection 
 
  **In this project I have created a django application for medical image Classification.** 
  I have created deep learning models for detection of the diseases, for chest diseases like covid, phenomania, tuberculosis, normal. for brain its detects if the patient has the tumor or not. for kidney it detects cyst, stone, tumor, and normal. and for skin it detects four types of skin diseases.

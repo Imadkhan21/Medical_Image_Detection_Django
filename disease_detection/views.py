@@ -6,44 +6,45 @@ import numpy as np
 from .models import KidneyDiseaseModel
 from keras.models import load_model
 from .forms import KidneyDiseaseForm
+from django.http import JsonResponse
+
+
 
 # Load the kidney disease model
 kidney_model = load_model(os.path.join(settings.BASE_DIR, 'disease_detection/models/final_model.h5'))
 
+# Preprocess the image
 def process(image_obj):
-    # Read image data from the file object
     img_data = image_obj.read()
-    # Convert the image data to a numpy array
     nparr = np.frombuffer(img_data, np.uint8)
-    # Decode the numpy array into an image
-    img = cv2.imdecode(nparr, cv2.IMREAD_GRAYSCALE)  # Use IMREAD_GRAYSCALE to convert to grayscale
-    # Resize the image to 225x225
+    img = cv2.imdecode(nparr, cv2.IMREAD_GRAYSCALE)
     img = cv2.resize(img, (225, 225))
-    # Normalize the image data to [0, 1]
     img = img / 255.0
-    # Expand dimensions to match the input shape for the model (1, 225, 225, 1)
     img = np.expand_dims(img, axis=0)
     img = np.expand_dims(img, axis=-1)
     return img
 
-def kidney_disease(pred_list):
+# Convert prediction to label and extract confidence
+def kidney_disease_with_confidence(pred_list):
     x = np.argmax(pred_list)
-    if x == 0:
-        output = "Disease: Cyst"
-    elif x == 1:
-        output = "Normal"
-    elif x == 2:
-        output = "Disease: Stone"
-    elif x == 3:
-        output = "Disease Tumor"
-    return output
+    confidence = float(np.max(pred_list)) * 100  # Convert to percentage
 
+    labels = ["Disease: Cyst", "Normal", "Disease: Stone", "Disease: Tumor"]
+    label = labels[x]
+
+    return label, round(confidence, 2)
+
+# Predict disease with confidence
 def kidney_disease_model_detection(img):
     pred = kidney_model.predict(img)
-    output = kidney_disease(pred)
-    print(output)
-    return output
+    label, confidence = kidney_disease_with_confidence(pred)
+    print(f"{label} (Confidence: {confidence}%)")
+    return label, confidence
 
+
+
+
+# Views
 def home(request):
     return render(request, 'home.html')
 
@@ -57,17 +58,29 @@ def info(request):
 def detection(request):
     return render(request, 'detection.html')
 
+# # Main detection view (AJAX compatible)
 def kidney_disease_detect(request):
-    if request.method == 'POST':
+    if request.method == 'POST' and request.headers.get('x-requested-with') == 'XMLHttpRequest':
         form = KidneyDiseaseForm(request.POST, request.FILES)
         if form.is_valid():
             image = form.cleaned_data['p_image']
-            image = process(image)
-            output = kidney_disease_model_detection(image)
+            processed_image = process(image)
+            output, confidence = kidney_disease_model_detection(processed_image)
+
             instance = form.save(commit=False)
             instance.p_disease = output
             instance.save()
-            return render(request, 'kidney_disease_detect.html', {'form': form, 'result': output})
+
+            return JsonResponse({
+                'result': output,
+                'confidence': confidence,
+                'uploaded_image_url': instance.p_image.url
+                
+            })
+        else:
+            return JsonResponse({'error': 'Invalid form data'}, status=400)
     else:
         form = KidneyDiseaseForm()
-    return render(request, 'kidney_disease_detect.html', {'form': form})
+        return render(request, 'kidney_disease_detect.html', {'form': form})
+
+

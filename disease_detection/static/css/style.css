@@ -1,0 +1,125 @@
+body {
+    background: #f4f7fa;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+#video-background {
+    max-height: 500px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.navbar .nav-link {
+    color: #fff;
+    font-weight: 500;
+}
+
+.navbar .nav-link.active {
+    color: #0dcaf0;
+    font-weight: 700;
+}
+
+.table th, .table td {
+    vertical-align: middle;
+    text-align: center;
+}
+
+h1, h2 {
+    color: #0d6efd;
+}
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f0f4f8;
+    }
+
+    .navbar {
+        background-color: #1e70e2;
+        padding: 15px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .navbar-brand {
+        font-size: 1.5rem;
+        color: #ffffff;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .navbar-links a {
+        color: #ffffff;
+        text-decoration: none;
+        margin-left: 20px;
+        font-weight: 500;
+    }
+
+    .form-container {
+        max-width: 500px;
+        margin: 60px auto;
+        padding: 40px;
+        background-color: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    }
+
+    h2 {
+        text-align: center;
+        color: #2563eb;
+        margin-bottom: 30px;
+        font-weight: 600;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 6px;
+        color: #333;
+        font-weight: 500;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="file"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 1rem;
+        transition: border 0.3s ease;
+    }
+
+    input:focus {
+        border-color: #2563eb;
+        outline: none;
+    }
+
+    button[type="submit"] {
+        width: 100%;
+        padding: 12px;
+        background-color: #2563eb;
+        color: #ffffff;
+        border: none;
+        border-radius: 50px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #1e40af;
+    }
+
+    footer {
+        background-color: #1f2937;
+        color: #ccc;
+        padding: 15px 0;
+        text-align: center;
+        font-size: 0.9rem;
+        margin-top: 60px;
+    }
+
