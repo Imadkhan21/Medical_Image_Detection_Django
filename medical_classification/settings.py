@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-o#ohdyv%*w!zh-4_^y=m#_q-gb(i8+r1=f*1=5nw6a1h6(ti49"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'medical-image-detection-django.onrender.com']
 
